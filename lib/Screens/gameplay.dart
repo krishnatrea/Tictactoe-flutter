@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tictactoe/gameclass/player.dart';
-import 'package:tictactoe/gameclass/simpleAiforplay.dart';
 
 class GamePlay extends StatefulWidget {
   @override
@@ -46,13 +45,6 @@ class _GameplayState extends State<GamePlay> {
 
   void taped(int i) {
     haveplay(i);
-
-    // if (isAI) {
-    //   int i = AI.generateFromAI(isclicked);
-    //   // haveplay(i);
-    //   print(i);
-    // }
-    // print(isclicked);
   }
 
   void haveplay(int i) {
