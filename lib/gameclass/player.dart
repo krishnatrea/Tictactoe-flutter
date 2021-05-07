@@ -26,12 +26,21 @@ class Player {
     } else if (isclicked[7] && isclicked[8] && isclicked[9]) {
       hasWin = true;
       return 3;
-    } else if (isclicked[1] && isclicked[5] && isclicked[9]) {
+    } else if (isclicked[1] && isclicked[4] && isclicked[7]) {
       hasWin = true;
       return 4;
-    } else if (isclicked[7] && isclicked[5] && isclicked[3]) {
+    } else if (isclicked[2] && isclicked[5] && isclicked[8]) {
       hasWin = true;
       return 5;
+    } else if (isclicked[3] && isclicked[6] && isclicked[9]) {
+      hasWin = true;
+      return 6;
+    } else if (isclicked[1] && isclicked[5] && isclicked[9]) {
+      hasWin = true;
+      return 7;
+    } else if (isclicked[3] && isclicked[5] && isclicked[7]) {
+      hasWin = true;
+      return 8;
     }
     return 0;
   }
