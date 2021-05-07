@@ -21,7 +21,7 @@ class _GameplayState extends State<GamePlay> {
     [36.0, 0.0, 280.0],
     [128.0, 0.0, 280.0],
     [220.0, 0.0, 280.0],
-    [250.0, 14.0, 350.0],
+    [250.0, 258.0, 345.0],
     [250.0, 14.0, 350.0]
   ];
   void toggalplayer() {
@@ -89,287 +89,294 @@ class _GameplayState extends State<GamePlay> {
           padding: const EdgeInsets.only(top: 250, left: 50),
           child: Container(
             alignment: Alignment.center,
-            child: Stack(
+            child: Column(
               children: [
-                Column(
+                Stack(
                   children: [
-                    Row(
+                    Column(
                       children: [
-                        InkWell(
-                          onTap: () {
-                            taped(1);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6),
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.red,
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                taped(1);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(6),
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.red,
+                                ),
+                                child: isclicked[1][1] == null
+                                    ? Offstage()
+                                    : Center(
+                                        child: Text(
+                                          isclicked[1][1],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .copyWith(
+                                                color: Colors.white,
+                                              ),
+                                        ),
+                                      ),
+                              ),
                             ),
-                            child: isclicked[1][1] == null
-                                ? Offstage()
-                                : Center(
-                                    child: Text(
-                                      isclicked[1][1],
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2
-                                          .copyWith(
-                                            color: Colors.white,
-                                          ),
-                                    ),
-                                  ),
-                          ),
+                            InkWell(
+                              onTap: () {
+                                taped(2);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(6),
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.red,
+                                ),
+                                child: isclicked[2][1] == null
+                                    ? Offstage()
+                                    : Center(
+                                        child: Text(
+                                          isclicked[2][1],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .copyWith(
+                                                color: Colors.white,
+                                              ),
+                                        ),
+                                      ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                taped(3);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(6),
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.red,
+                                ),
+                                child: isclicked[3][1] == null
+                                    ? Offstage()
+                                    : Center(
+                                        child: Text(
+                                          isclicked[3][1],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .copyWith(
+                                                color: Colors.white,
+                                              ),
+                                        ),
+                                      ),
+                              ),
+                            )
+                          ],
                         ),
-                        InkWell(
-                          onTap: () {
-                            taped(2);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6),
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.red,
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                taped(4);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(6),
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.red,
+                                ),
+                                child: isclicked[4][1] == null
+                                    ? Offstage()
+                                    : Center(
+                                        child: Text(
+                                          isclicked[4][1],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .copyWith(
+                                                color: Colors.white,
+                                              ),
+                                        ),
+                                      ),
+                              ),
                             ),
-                            child: isclicked[2][1] == null
-                                ? Offstage()
-                                : Center(
-                                    child: Text(
-                                      isclicked[2][1],
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2
-                                          .copyWith(
-                                            color: Colors.white,
-                                          ),
-                                    ),
-                                  ),
-                          ),
+                            InkWell(
+                              onTap: () {
+                                taped(5);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(6),
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.red,
+                                ),
+                                child: isclicked[5][1] == null
+                                    ? Offstage()
+                                    : Center(
+                                        child: Text(
+                                          isclicked[5][1],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .copyWith(
+                                                color: Colors.white,
+                                              ),
+                                        ),
+                                      ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                taped(6);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(6),
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.red,
+                                ),
+                                child: isclicked[6][1] == null
+                                    ? Offstage()
+                                    : Center(
+                                        child: Text(
+                                          isclicked[6][1],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .copyWith(
+                                                color: Colors.white,
+                                              ),
+                                        ),
+                                      ),
+                              ),
+                            )
+                          ],
                         ),
-                        InkWell(
-                          onTap: () {
-                            taped(3);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6),
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.red,
+                        Row(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                taped(7);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(6),
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.red,
+                                ),
+                                child: isclicked[7][1] == null
+                                    ? Offstage()
+                                    : Center(
+                                        child: Text(
+                                          isclicked[7][1],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .copyWith(
+                                                color: Colors.white,
+                                              ),
+                                        ),
+                                      ),
+                              ),
                             ),
-                            child: isclicked[3][1] == null
-                                ? Offstage()
-                                : Center(
-                                    child: Text(
-                                      isclicked[3][1],
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2
-                                          .copyWith(
-                                            color: Colors.white,
-                                          ),
-                                    ),
-                                  ),
-                          ),
-                        )
+                            InkWell(
+                              onTap: () {
+                                taped(8);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(6),
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.red,
+                                ),
+                                child: isclicked[8][1] == null
+                                    ? Offstage()
+                                    : Center(
+                                        child: Text(
+                                          isclicked[8][1],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .copyWith(
+                                                color: Colors.white,
+                                              ),
+                                        ),
+                                      ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                taped(9);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(6),
+                                height: 80,
+                                width: 80,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.red,
+                                ),
+                                child: isclicked[9][1] == null
+                                    ? Offstage()
+                                    : Center(
+                                        child: Text(
+                                          isclicked[9][1],
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline2
+                                              .copyWith(
+                                                color: Colors.white,
+                                              ),
+                                        ),
+                                      ),
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            taped(4);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6),
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.red,
+                    gameover
+                        ? Positioned(
+                            left: positionNo[6][0],
+                            top: positionNo[6][1],
+                            child: Transform(
+                              alignment: FractionalOffset.topCenter,
+                              transform: new Matrix4.identity()
+                                ..rotateZ(rotationAngle[6] * 3.1415927 / 180),
+                              child: Container(
+                                height: positionNo[6][2],
+                                width: 20,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(40),
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
-                            child: isclicked[4][1] == null
-                                ? Offstage()
-                                : Center(
-                                    child: Text(
-                                      isclicked[4][1],
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2
-                                          .copyWith(
-                                            color: Colors.white,
-                                          ),
-                                    ),
-                                  ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            taped(5);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6),
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.red,
-                            ),
-                            child: isclicked[5][1] == null
-                                ? Offstage()
-                                : Center(
-                                    child: Text(
-                                      isclicked[5][1],
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2
-                                          .copyWith(
-                                            color: Colors.white,
-                                          ),
-                                    ),
-                                  ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            taped(6);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6),
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.red,
-                            ),
-                            child: isclicked[6][1] == null
-                                ? Offstage()
-                                : Center(
-                                    child: Text(
-                                      isclicked[6][1],
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2
-                                          .copyWith(
-                                            color: Colors.white,
-                                          ),
-                                    ),
-                                  ),
-                          ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            taped(7);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6),
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.red,
-                            ),
-                            child: isclicked[7][1] == null
-                                ? Offstage()
-                                : Center(
-                                    child: Text(
-                                      isclicked[7][1],
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2
-                                          .copyWith(
-                                            color: Colors.white,
-                                          ),
-                                    ),
-                                  ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            taped(8);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6),
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.red,
-                            ),
-                            child: isclicked[8][1] == null
-                                ? Offstage()
-                                : Center(
-                                    child: Text(
-                                      isclicked[8][1],
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2
-                                          .copyWith(
-                                            color: Colors.white,
-                                          ),
-                                    ),
-                                  ),
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            taped(9);
-                          },
-                          child: Container(
-                            margin: EdgeInsets.all(6),
-                            height: 80,
-                            width: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Colors.red,
-                            ),
-                            child: isclicked[9][1] == null
-                                ? Offstage()
-                                : Center(
-                                    child: Text(
-                                      isclicked[9][1],
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline2
-                                          .copyWith(
-                                            color: Colors.white,
-                                          ),
-                                    ),
-                                  ),
-                          ),
-                        )
-                      ],
-                    ),
+                          )
+                        : Offstage(),
                   ],
                 ),
-                gameover
-                    ? Positioned(
-                        left: positionNo[rotatingindex-1][0],
-                        top: positionNo[rotatingindex-1][1],
-                        child: Transform(
-                          alignment: FractionalOffset.topCenter,
-                          transform: new Matrix4.identity()
-                            ..rotateZ(
-                                rotationAngle[rotatingindex-1] * 3.1415927 / 180),
-                          child: Container(
-                            height: positionNo[rotatingindex-1][2],
-                            width: 20,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      )
-                    : Offstage(),
+                FlatButton(
+                  onPressed: () {},
+                  child: Text('Reset'),
+                ),
               ],
             ),
           ),
