@@ -13,6 +13,7 @@ class _GameplayState extends State<GamePlay> {
   bool isDraw = false;
   List<double> rotationAngle = [90, 90, 90, 0, 0, 0, -50, 50];
   int rotatingindex;
+  int winner;
   List<List<double>> positionNo = [
     [-95, 147.0, 285.0],
     [0.0, 147.0, 285.0],
@@ -57,120 +58,50 @@ class _GameplayState extends State<GamePlay> {
     haveplay(i);
   }
 
-  void updatethings() {}
+  void updatethings(int i) {
+    isclicked[i][0] = true;
+    isclicked[i][1] = player[currentplayer].playerSymbol;
+    player[currentplayer].isclicked[i] = true;
+    setState(() {});
+    rotatingindex = player[currentplayer].isWin();
+  }
 
   void haveplay(int i) {
     if (!isclicked[i][0]) {
-      isclicked[i][0] = true;
-      isclicked[i][1] = player[currentplayer].playerSymbol;
-      player[currentplayer].isclicked[i] = true;
-      toggalplayer();
-      setState(() {});
-      rotatingindex = player[currentplayer].isWin();
-      if (player[currentplayer].isWin() > 0) {
+      updatethings(i);
+      if (rotatingindex > 0) {
         for (int i = 1; i <= 9; i++) {
           isclicked[i][0] = true;
         }
         gameover = true;
-
+        winner = currentplayer;
         setState(() {});
       }
-      if (howmanyclicked() == 9) {
+
+      if (howmanyclicked() == 9 && !gameover) {
         isDraw = true;
       }
-      if (isDraw) {
-        setState(() {
-          //Todo work.........
-        });
-      }
+      toggalplayer();
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            !gameover
-                ? Container(
-                    child:
-                        Text('Player  ${player[currentplayer].playerSymbol}'),
-                  )
-                : Container(
-                    child: Text('Game Over'),
-                  ),
-            Container(
-              height: 360,
-              width: 312,
-              decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Stack(
-                      children: [
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                gridView(context, 1),
-                                gridView(context, 2),
-                                gridView(context, 3),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                gridView(context, 4),
-                                gridView(context, 5),
-                                gridView(context, 6),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                gridView(context, 7),
-                                gridView(context, 8),
-                                gridView(context, 9),
-                              ],
-                            ),
-                          ],
-                        ),
-                        gameover
-                            ? Positioned(
-                                top: positionNo[rotatingindex - 1][0],
-                                left: positionNo[rotatingindex - 1][1],
-                                child: Transform(
-                                  alignment: FractionalOffset.center,
-                                  transform: new Matrix4.identity()
-                                    ..rotateZ(rotationAngle[rotatingindex - 1] *
-                                        3.1415927 /
-                                        180),
-                                  child: Container(
-                                    height: positionNo[rotatingindex - 1][2],
-                                    width: 20,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(40),
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            : Offstage(),
-                      ],
-                    ),
-                  ]),
-            )
-          ]),
+  Positioned cutterPositioned() {
+    return Positioned(
+      top: positionNo[rotatingindex - 1][0],
+      left: positionNo[rotatingindex - 1][1],
+      child: Transform(
+        alignment: FractionalOffset.center,
+        transform: new Matrix4.identity()
+          ..rotateZ(rotationAngle[rotatingindex - 1] * 3.1415927 / 180),
+        child: Container(
+          height: positionNo[rotatingindex - 1][2],
+          width: 20,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(40),
+            color: Colors.black,
+          ),
+        ),
+      ),
     );
   }
 
@@ -197,6 +128,89 @@ class _GameplayState extends State<GamePlay> {
                 ),
         ),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          isDraw
+              ? textShow('Game Draw')
+              : !gameover
+                  ? textShow('Player  ${player[currentplayer].playerSymbol}')
+                  : textShow(
+                      'Game Over and ${player[winner].playerSymbol} is win'),
+          Container(
+            height: 360,
+            width: 312,
+            decoration: BoxDecoration(
+              color: Colors.amber,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Stack(
+                  children: [
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            gridView(context, 1),
+                            gridView(context, 2),
+                            gridView(context, 3),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            gridView(context, 4),
+                            gridView(context, 5),
+                            gridView(context, 6),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            gridView(context, 7),
+                            gridView(context, 8),
+                            gridView(context, 9),
+                          ],
+                        ),
+                      ],
+                    ),
+                    gameover ? cutterPositioned() : Offstage(),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container textShow(String str) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(40),
+        color: Colors.yellow,
+      ),
+      child: Text(str,
+          style: Theme.of(context).textTheme.headline3.copyWith(
+                color: Colors.black,
+              )),
     );
   }
 }
