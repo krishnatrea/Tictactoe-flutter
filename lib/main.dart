@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'Screens/gameplay.dart';
+import 'package:tictactoe/Screens/GameScreen.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: GamePlay(),
+    home: GameScreen(),
   ));
 }
