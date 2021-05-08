@@ -199,7 +199,7 @@ class _GameplayState extends State<GamePlay> {
     );
   }
 
-  Container textShow(String str) {
+Container textShow(String str) {
     return Container(
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(10),
