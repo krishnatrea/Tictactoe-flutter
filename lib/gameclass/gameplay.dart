@@ -10,7 +10,6 @@ class _GameplayState extends State<GamePlay> {
   List<Player> player = [Player("O"), Player("X")];
   int currentplayer = 0;
   bool gameover = false;
-  bool isAI = true;
   bool isDraw = false;
   List<double> rotationAngle = [90, 90, 90, 0, 0, 0, -50, 50];
   int rotatingindex;
@@ -58,12 +57,14 @@ class _GameplayState extends State<GamePlay> {
     haveplay(i);
   }
 
+  void updatethings() {}
+
   void haveplay(int i) {
     if (!isclicked[i][0]) {
       isclicked[i][0] = true;
       isclicked[i][1] = player[currentplayer].playerSymbol;
       player[currentplayer].isclicked[i] = true;
-      print(player[currentplayer].isclicked);
+      toggalplayer();
       setState(() {});
       rotatingindex = player[currentplayer].isWin();
       if (player[currentplayer].isWin() > 0) {
@@ -71,296 +72,131 @@ class _GameplayState extends State<GamePlay> {
           isclicked[i][0] = true;
         }
         gameover = true;
+
         setState(() {});
       }
       if (howmanyclicked() == 9) {
         isDraw = true;
       }
-      toggalplayer();
+      if (isDraw) {
+        setState(() {
+          //Todo work.........
+        });
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
+    return Center(
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () {
-                    taped(1);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      maxRadius: 40,
-                      minRadius: 10,
-                      child: isclicked[1][1] == null
-                          ? Offstage()
-                          : Center(
-                              child: Text(
-                                isclicked[1][1],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              ),
+            !gameover
+                ? Container(
+                    child:
+                        Text('Player  ${player[currentplayer].playerSymbol}'),
+                  )
+                : Container(
+                    child: Text('Game Over'),
+                  ),
+            Container(
+              height: 360,
+              width: 312,
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Stack(
+                      children: [
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                gridView(context, 1),
+                                gridView(context, 2),
+                                gridView(context, 3),
+                              ],
                             ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                gridView(context, 4),
+                                gridView(context, 5),
+                                gridView(context, 6),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                gridView(context, 7),
+                                gridView(context, 8),
+                                gridView(context, 9),
+                              ],
+                            ),
+                          ],
+                        ),
+                        gameover
+                            ? Positioned(
+                                top: positionNo[rotatingindex - 1][0],
+                                left: positionNo[rotatingindex - 1][1],
+                                child: Transform(
+                                  alignment: FractionalOffset.center,
+                                  transform: new Matrix4.identity()
+                                    ..rotateZ(rotationAngle[rotatingindex - 1] *
+                                        3.1415927 /
+                                        180),
+                                  child: Container(
+                                    height: positionNo[rotatingindex - 1][2],
+                                    width: 20,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(40),
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Offstage(),
+                      ],
                     ),
+                  ]),
+            )
+          ]),
+    );
+  }
+
+  InkWell gridView(BuildContext context, int index) {
+    return InkWell(
+      onTap: () {
+        taped(index);
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: CircleAvatar(
+          backgroundColor: Colors.red,
+          maxRadius: 40,
+          minRadius: 10,
+          child: isclicked[index][1] == null
+              ? Offstage()
+              : Center(
+                  child: Text(
+                    isclicked[index][1],
+                    style: Theme.of(context).textTheme.headline2.copyWith(
+                          color: Colors.white,
+                        ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    taped(2);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      maxRadius: 40,
-                      minRadius: 10,
-                      child: isclicked[2][1] == null
-                          ? Offstage()
-                          : Center(
-                              child: Text(
-                                isclicked[2][1],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              ),
-                            ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    taped(3);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      maxRadius: 40,
-                      minRadius: 10,
-                      child: isclicked[3][1] == null
-                          ? Offstage()
-                          : Center(
-                              child: Text(
-                                isclicked[3][1],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              ),
-                            ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () {
-                    taped(4);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      maxRadius: 40,
-                      minRadius: 10,
-                      child: isclicked[4][1] == null
-                          ? Offstage()
-                          : Center(
-                              child: Text(
-                                isclicked[4][1],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              ),
-                            ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    taped(5);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      maxRadius: 40,
-                      minRadius: 10,
-                      child: isclicked[5][1] == null
-                          ? Offstage()
-                          : Center(
-                              child: Text(
-                                isclicked[5][1],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              ),
-                            ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    taped(6);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      maxRadius: 40,
-                      minRadius: 10,
-                      child: isclicked[6][1] == null
-                          ? Offstage()
-                          : Center(
-                              child: Text(
-                                isclicked[6][1],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              ),
-                            ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () {
-                    taped(7);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      maxRadius: 40,
-                      minRadius: 10,
-                      child: isclicked[7][1] == null
-                          ? Offstage()
-                          : Center(
-                              child: Text(
-                                isclicked[7][1],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              ),
-                            ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    taped(8);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      maxRadius: 40,
-                      minRadius: 10,
-                      child: isclicked[8][1] == null
-                          ? Offstage()
-                          : Center(
-                              child: Text(
-                                isclicked[8][1],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              ),
-                            ),
-                    ),
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    taped(9);
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.red,
-                      maxRadius: 40,
-                      minRadius: 10,
-                      child: isclicked[9][1] == null
-                          ? Offstage()
-                          : Center(
-                              child: Text(
-                                isclicked[9][1],
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline2
-                                    .copyWith(
-                                      color: Colors.white,
-                                    ),
-                              ),
-                            ),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ],
         ),
-        gameover
-            ? Positioned(
-                top: positionNo[rotatingindex - 1][0],
-                left: positionNo[rotatingindex - 1][1],
-                child: Transform(
-                  alignment: FractionalOffset.center,
-                  transform: new Matrix4.identity()
-                    ..rotateZ(
-                        rotationAngle[rotatingindex - 1] * 3.1415927 / 180),
-                  child: Container(
-                    height: positionNo[rotatingindex - 1][2],
-                    width: 20,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              )
-            : Offstage(),
-      ],
+      ),
     );
   }
 }
