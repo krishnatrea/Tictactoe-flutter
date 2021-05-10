@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:tictactoe/Screens/GameScreen.dart';
 
@@ -6,3 +8,5 @@ void main() {
     home: GameScreen(),
   ));
 }
+
+// main.dart
