@@ -6,6 +6,9 @@ import 'package:tictactoe/widgets/textShow.dart';
 
 class GamePlay extends StatefulWidget {
   final gameplaystate = _GameplayState();
+  final bool isAi;
+
+  GamePlay({Key key, this.isAi}) : super(key: key);
   @override
   _GameplayState createState() => gameplaystate;
 }
@@ -18,7 +21,6 @@ class _GameplayState extends State<GamePlay> {
   List<double> rotationAngle = [90, 90, 90, 0, 0, 0, -50, 50];
   int rotatingindex;
   int winner;
-  bool isAi = true;
   List<List<double>> positionNo = [
     [-95, 147.0, 285.0],
     [0.0, 147.0, 285.0],
@@ -78,7 +80,7 @@ class _GameplayState extends State<GamePlay> {
   void taped(int i) {
     haveplay(i);
     if (howmanyclicked() != 9) {
-      if (isAi) {
+      if (widget.isAi) {
         haveplay(indexbyAI());
       }
     }

@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:tictactoe/gameclass/gameplay.dart';
 
+import '../gameclass/gameplay.dart';
+
 class GameScreen extends StatefulWidget {
+  final bool isAil;
+
+  const GameScreen({Key key, this.isAil}) : super(key: key);
+
   @override
   _GameScreenState createState() => _GameScreenState();
 }
 
 class _GameScreenState extends State<GameScreen> {
-  var gamepriview = new GamePlay();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: Icon(Icons.exit_to_app_outlined),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       backgroundColor: Color.fromRGBO(120, 0, 0, 1),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -39,7 +53,9 @@ class _GameScreenState extends State<GameScreen> {
                           topRight: Radius.circular(100)),
                       color: Color.fromRGBO(253, 240, 213, 1),
                     ),
-                    child: gamepriview,
+                    child: GamePlay(
+                      isAi: widget.isAil,
+                    ),
                   ),
                 ],
               ),
@@ -50,9 +66,9 @@ class _GameScreenState extends State<GameScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(120, 0, 0, 1),
         onPressed: () {
-          gamepriview.gameplaystate.reset();
+          Navigator.of(context).pop();
         },
-        child: Text('Reset'),
+        child: Text('Replay'),
       ),
     );
   }

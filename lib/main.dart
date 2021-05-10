@@ -10,7 +10,7 @@ void main() {
       // theme: Theme1.base,
       // darkTheme: Theme2.base,
       debugShowCheckedModeBanner: false,
-      home: GameScreen(),
+      home: Home(),
     ),
   );
 }

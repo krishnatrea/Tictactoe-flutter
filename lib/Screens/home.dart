@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tictactoe/theme/theme.dart';
 
+import 'GameScreen.dart';
+
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -57,7 +59,9 @@ class _HomeState extends State<Home> {
                 height: 40,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  navigate(true);
+                },
                 child: Container(
                   height: 80,
                   width: 290,
@@ -76,7 +80,9 @@ class _HomeState extends State<Home> {
                 height: 40,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  navigate(false);
+                },
                 child: Container(
                   height: 80,
                   width: 290,
@@ -96,5 +102,12 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  void navigate(bool isAi) {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (_) => GameScreen(
+              isAil: isAi,
+            )));
   }
 }
