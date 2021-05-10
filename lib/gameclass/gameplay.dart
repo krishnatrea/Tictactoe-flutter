@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tictactoe/gameclass/player.dart';
 
 class GamePlay extends StatefulWidget {
+  var gameplaystate = _GameplayState();
   @override
-  _GameplayState createState() => _GameplayState();
+  _GameplayState createState() => gameplaystate;
 }
 
 class _GameplayState extends State<GamePlay> {
@@ -58,6 +59,28 @@ class _GameplayState extends State<GamePlay> {
     haveplay(i);
   }
 
+  void reset() {
+    isclicked = {
+      1: [false, null],
+      2: [false, null],
+      3: [false, null],
+      4: [false, null],
+      5: [false, null],
+      6: [false, null],
+      7: [false, null],
+      8: [false, null],
+      9: [false, null]
+    };
+
+    player = [Player("O"), Player("X")];
+    currentplayer = 0;
+    gameover = false;
+    isDraw = false;
+    winner = null;
+    rotatingindex = null;
+    setState(() {});
+  }
+
   void updatethings(int i) {
     isclicked[i][0] = true;
     isclicked[i][1] = player[currentplayer].playerSymbol;
@@ -98,7 +121,7 @@ class _GameplayState extends State<GamePlay> {
           width: 20,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(40),
-            color: Colors.black,
+            color: Color.fromRGBO(0, 48, 73, 1),
           ),
         ),
       ),
@@ -113,7 +136,7 @@ class _GameplayState extends State<GamePlay> {
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: CircleAvatar(
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.white,
           maxRadius: 40,
           minRadius: 10,
           child: isclicked[index][1] == null
@@ -122,7 +145,7 @@ class _GameplayState extends State<GamePlay> {
                   child: Text(
                     isclicked[index][1],
                     style: Theme.of(context).textTheme.headline2.copyWith(
-                          color: Colors.white,
+                          color: Color.fromRGBO(0, 48, 73, 1),
                         ),
                   ),
                 ),
@@ -144,54 +167,60 @@ class _GameplayState extends State<GamePlay> {
                   ? textShow('Player  ${player[currentplayer].playerSymbol}')
                   : textShow(
                       'Game Over and ${player[winner].playerSymbol} is win'),
-          Container(
-            height: 360,
-            width: 312,
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Stack(
+          SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Container(
+                height: 360,
+                width: 312,
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(120, 0, 0, 1),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Column(
+                    Stack(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
+                        Column(
                           children: [
-                            gridView(context, 1),
-                            gridView(context, 2),
-                            gridView(context, 3),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                gridView(context, 1),
+                                gridView(context, 2),
+                                gridView(context, 3),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                gridView(context, 4),
+                                gridView(context, 5),
+                                gridView(context, 6),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                gridView(context, 7),
+                                gridView(context, 8),
+                                gridView(context, 9),
+                              ],
+                            ),
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            gridView(context, 4),
-                            gridView(context, 5),
-                            gridView(context, 6),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            gridView(context, 7),
-                            gridView(context, 8),
-                            gridView(context, 9),
-                          ],
-                        ),
+                        gameover ? cutterPositioned() : Offstage(),
                       ],
                     ),
-                    gameover ? cutterPositioned() : Offstage(),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
         ],
@@ -199,17 +228,18 @@ class _GameplayState extends State<GamePlay> {
     );
   }
 
-Container textShow(String str) {
+  Container textShow(String str) {
     return Container(
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(40),
-        color: Colors.yellow,
+        borderRadius: BorderRadius.circular(10),
+        color: Color.fromRGBO(0, 48, 73, 1),
       ),
       child: Text(str,
-          style: Theme.of(context).textTheme.headline3.copyWith(
-                color: Colors.black,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headline4.copyWith(
+                color: Colors.white,
               )),
     );
   }

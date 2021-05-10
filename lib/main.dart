@@ -4,5 +4,5 @@ import 'package:tictactoe/Screens/GameScreen.dart';
 void main() {
   runApp(MaterialApp(
     home: GameScreen(),
-  ));
+  ),);
 }
