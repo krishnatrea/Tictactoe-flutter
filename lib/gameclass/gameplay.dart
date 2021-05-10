@@ -1,8 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:tictactoe/gameclass/player.dart';
 
 class GamePlay extends StatefulWidget {
-  var gameplaystate = _GameplayState();
+  final gameplaystate = _GameplayState();
   @override
   _GameplayState createState() => gameplaystate;
 }
@@ -15,6 +17,7 @@ class _GameplayState extends State<GamePlay> {
   List<double> rotationAngle = [90, 90, 90, 0, 0, 0, -50, 50];
   int rotatingindex;
   int winner;
+  bool isAi = true;
   List<List<double>> positionNo = [
     [-95, 147.0, 285.0],
     [0.0, 147.0, 285.0],
@@ -55,8 +58,29 @@ class _GameplayState extends State<GamePlay> {
     return click;
   }
 
+  int indexbyAI() {
+    if (!gameover && !isDraw) {
+      var random = new Random();
+      var r = random.nextInt(9) + 1;
+      for (int i = r; i < 10; i++) {
+        if (!isclicked[i][0]) {
+          // print(i);
+          return i;
+        }
+        if (i == 9) {
+          i = 1;
+        }
+      }
+    }
+  }
+
   void taped(int i) {
     haveplay(i);
+    if (howmanyclicked() != 9) {
+      if (isAi) {
+        haveplay(indexbyAI());
+      }
+    }
   }
 
   void reset() {
@@ -131,7 +155,7 @@ class _GameplayState extends State<GamePlay> {
   InkWell gridView(BuildContext context, int index) {
     return InkWell(
       onTap: () {
-        taped(index);
+        if (!isclicked[index][0]) taped(index);
       },
       child: Padding(
         padding: const EdgeInsets.all(8),
