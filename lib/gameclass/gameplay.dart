@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:tictactoe/gameclass/player.dart';
+import 'package:tictactoe/widgets/textShow.dart';
 
 class GamePlay extends StatefulWidget {
   final gameplaystate = _GameplayState();
@@ -186,11 +187,13 @@ class _GameplayState extends State<GamePlay> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           isDraw
-              ? textShow('Game Draw')
+              ? textShow('Game Draw', context)
               : !gameover
-                  ? textShow('Player  ${player[currentplayer].playerSymbol}')
+                  ? textShow(
+                      'Player  ${player[currentplayer].playerSymbol}', context)
                   : textShow(
-                      'Game Over and ${player[winner].playerSymbol} is win'),
+                      'Game Over and ${player[winner].playerSymbol} is win',
+                      context),
           SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: SingleChildScrollView(
@@ -249,22 +252,6 @@ class _GameplayState extends State<GamePlay> {
           ),
         ],
       ),
-    );
-  }
-
-  Container textShow(String str) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Color.fromRGBO(0, 48, 73, 1),
-      ),
-      child: Text(str,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline4.copyWith(
-                color: Colors.white,
-              )),
     );
   }
 }
