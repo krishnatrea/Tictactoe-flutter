@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tictactoe/theme/theme.dart';
-
 import 'GameScreen.dart';
 
 class Home extends StatefulWidget {
@@ -16,7 +14,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Color(0xffa0c4ff),
         title: Text(
           "Tic Tac Toe",
-          style: Theme.of(context).textTheme.title,
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
       body: Center(
@@ -105,9 +103,12 @@ class _HomeState extends State<Home> {
   }
 
   void navigate(bool isAi) {
-    Navigator.of(context).push(MaterialPageRoute(
+    Navigator.of(context).push(
+      MaterialPageRoute(
         builder: (_) => GameScreen(
-              isAil: isAi,
-            )));
+          isAil: isAi,
+        ),
+      ),
+    );
   }
 }

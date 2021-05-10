@@ -17,50 +17,22 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(Icons.exit_to_app_outlined),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+        backgroundColor: Color(0xffa0c4ff),
+        title: Text(
+          "Tic Tac Toe",
+          style: Theme.of(context).textTheme.headline6,
         ),
       ),
-      backgroundColor: Color.fromRGBO(120, 0, 0, 1),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: 200,
-                width: double.infinity,
-                child: Center(
-                  child: Text('Tic Tac Toe',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic)),
-                ),
-              ),
-              Stack(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height - 200,
-                    alignment: Alignment.bottomCenter,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(100),
-                          topRight: Radius.circular(100)),
-                      color: Color.fromRGBO(253, 240, 213, 1),
-                    ),
-                    child: GamePlay(
-                      isAi: widget.isAil,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+      body: Center(
+        child: Container(
+          height: 600,
+          width: 380,
+          decoration: BoxDecoration(
+            color: Color(0xfffae0e4),
+            shape: BoxShape.rectangle,
+            border: Border.all(width: 2, color: Colors.black),
           ),
+          child: GamePlay(isAi: widget.isAil),
         ),
       ),
       floatingActionButton: FloatingActionButton(

@@ -1,7 +1,9 @@
 import 'dart:math';
-
+import 'package:tictactoe/measurements/measurments.dart';
 import 'package:flutter/material.dart';
 import 'package:tictactoe/gameclass/player.dart';
+import 'package:tictactoe/widgets/cutterpositioned.dart';
+import 'package:tictactoe/widgets/gridviewinkwell.dart';
 import 'package:tictactoe/widgets/textShow.dart';
 
 class GamePlay extends StatefulWidget {
@@ -18,27 +20,8 @@ class _GameplayState extends State<GamePlay> {
   int currentplayer = 0;
   bool gameover = false;
   bool isDraw = false;
-  List<double> rotationAngle = [90, 90, 90, 0, 0, 0, -50, 50];
   int rotatingindex;
   int winner;
-  List<List<double>> positionNo = [
-    [-95, 147.0, 285.0],
-    [0.0, 147.0, 285.0],
-    [96, 147.0, 285.0],
-    [4.0, 44.0, 285.0],
-    [4.0, 147.0, 285.0],
-    [4.0, 248.5, 285.0],
-    [-35.0, 150.35, 360.0],
-    [-35.0, 150.35, 360.0]
-  ];
-  void toggalplayer() {
-    if (currentplayer == 0) {
-      currentplayer = 1;
-    } else {
-      currentplayer = 0;
-    }
-  }
-
   Map<int, List> isclicked = {
     1: [false, null],
     2: [false, null],
@@ -50,6 +33,35 @@ class _GameplayState extends State<GamePlay> {
     8: [false, null],
     9: [false, null]
   };
+
+  void reset() {
+    isclicked = {
+      1: [false, null],
+      2: [false, null],
+      3: [false, null],
+      4: [false, null],
+      5: [false, null],
+      6: [false, null],
+      7: [false, null],
+      8: [false, null],
+      9: [false, null]
+    };
+    player = [Player("O"), Player("X")];
+    currentplayer = 0;
+    gameover = false;
+    isDraw = false;
+    winner = null;
+    rotatingindex = null;
+    setState(() {});
+  }
+
+  void toggalplayer() {
+    if (currentplayer == 0) {
+      currentplayer = 1;
+    } else {
+      currentplayer = 0;
+    }
+  }
 
   int howmanyclicked() {
     int click = 0;
@@ -75,37 +87,18 @@ class _GameplayState extends State<GamePlay> {
         }
       }
     }
+    return 0;
   }
 
   void taped(int i) {
     haveplay(i);
-    if (howmanyclicked() != 9) {
-      if (widget.isAi) {
-        haveplay(indexbyAI());
+    Future.delayed(const Duration(milliseconds: 200), () {
+      if (howmanyclicked() != 9) {
+        if (widget.isAi) {
+          haveplay(indexbyAI());
+        }
       }
-    }
-  }
-
-  void reset() {
-    isclicked = {
-      1: [false, null],
-      2: [false, null],
-      3: [false, null],
-      4: [false, null],
-      5: [false, null],
-      6: [false, null],
-      7: [false, null],
-      8: [false, null],
-      9: [false, null]
-    };
-
-    player = [Player("O"), Player("X")];
-    currentplayer = 0;
-    gameover = false;
-    isDraw = false;
-    winner = null;
-    rotatingindex = null;
-    setState(() {});
+    });
   }
 
   void updatethings(int i) {
@@ -135,125 +128,111 @@ class _GameplayState extends State<GamePlay> {
     }
   }
 
-  Positioned cutterPositioned() {
-    return Positioned(
-      top: positionNo[rotatingindex - 1][0],
-      left: positionNo[rotatingindex - 1][1],
-      child: Transform(
-        alignment: FractionalOffset.center,
-        transform: new Matrix4.identity()
-          ..rotateZ(rotationAngle[rotatingindex - 1] * 3.1415927 / 180),
-        child: Container(
-          height: positionNo[rotatingindex - 1][2],
-          width: 20,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40),
-            color: Color.fromRGBO(0, 48, 73, 1),
-          ),
-        ),
-      ),
-    );
-  }
-
-  InkWell gridView(BuildContext context, int index) {
-    return InkWell(
-      onTap: () {
-        if (!isclicked[index][0]) taped(index);
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: CircleAvatar(
-          backgroundColor: Colors.white,
-          maxRadius: 40,
-          minRadius: 10,
-          child: isclicked[index][1] == null
-              ? Offstage()
-              : Center(
-                  child: Text(
-                    isclicked[index][1],
-                    style: Theme.of(context).textTheme.headline2.copyWith(
-                          color: Color.fromRGBO(0, 48, 73, 1),
-                        ),
-                  ),
-                ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          isDraw
-              ? textShow('Game Draw', context)
-              : !gameover
-                  ? textShow(
-                      'Player  ${player[currentplayer].playerSymbol}', context)
-                  : textShow(
-                      'Game Over and ${player[winner].playerSymbol} is win',
-                      context),
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Container(
-                height: 360,
-                width: 312,
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(120, 0, 0, 1),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Stack(
-                      children: [
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                gridView(context, 1),
-                                gridView(context, 2),
-                                gridView(context, 3),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                gridView(context, 4),
-                                gridView(context, 5),
-                                gridView(context, 6),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                gridView(context, 7),
-                                gridView(context, 8),
-                                gridView(context, 9),
-                              ],
-                            ),
-                          ],
-                        ),
-                        gameover ? cutterPositioned() : Offstage(),
-                      ],
-                    ),
-                  ],
-                ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        isDraw
+            ? textShow('Game Draw', context)
+            : !gameover
+                ? textShow(
+                    'Player  ${player[currentplayer].playerSymbol}', context)
+                : textShow(
+                    'Game Over and ${player[winner].playerSymbol} is win',
+                    context),
+        SizedBox(
+          height: 30,
+        ),
+        Container(
+          height: 300,
+          width: 312,
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      gridView(
+                          context: context,
+                          index: 1,
+                          isclicked: isclicked,
+                          taped: taped),
+                      gridView(
+                          context: context,
+                          index: 2,
+                          isclicked: isclicked,
+                          taped: taped),
+                      gridView(
+                          context: context,
+                          index: 3,
+                          isclicked: isclicked,
+                          taped: taped),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      gridView(
+                          context: context,
+                          index: 4,
+                          isclicked: isclicked,
+                          taped: taped),
+                      gridView(
+                          context: context,
+                          index: 5,
+                          isclicked: isclicked,
+                          taped: taped),
+                      gridView(
+                          context: context,
+                          index: 6,
+                          isclicked: isclicked,
+                          taped: taped),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      gridView(
+                          context: context,
+                          index: 7,
+                          isclicked: isclicked,
+                          taped: taped),
+                      gridView(
+                          context: context,
+                          index: 8,
+                          isclicked: isclicked,
+                          taped: taped),
+                      gridView(
+                          context: context,
+                          index: 9,
+                          isclicked: isclicked,
+                          taped: taped),
+                    ],
+                  ),
+                ],
               ),
-            ),
+              cutterPositioned(top: 0, left: 100, angle: 0, height: 300),
+              cutterPositioned(top: 0, left: 200, angle: 0, height: 300),
+              cutterPositioned(top: -50, left: 150, angle: 90, height: 300),
+              cutterPositioned(top: 50, left: 150, angle: 90, height: 300),
+              gameover
+                  ? cutterPositioned(
+                      top: positionNo[rotatingindex - 1][0],
+                      left: positionNo[rotatingindex - 1][1],
+                      angle: rotationAngle[rotatingindex - 1],
+                      height: positionNo[rotatingindex - 1][2],
+                    )
+                  : Offstage(),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

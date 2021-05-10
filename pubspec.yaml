@@ -63,9 +63,9 @@ flutter:
   fonts:
     - family: Roboto
       fonts:
-        - asset: fonts\RobotoSlab-VariableFont_wght.ttf
+        - asset: fonts/RobotoSlab-VariableFont_wght.ttf
     - family: Crimson
       fonts:
-        - asset: fonts\CrimsonText-Italic.ttf
+        - asset: fonts/CrimsonText-Italic.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
