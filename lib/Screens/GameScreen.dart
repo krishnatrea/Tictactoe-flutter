@@ -20,12 +20,12 @@ class _GameScreenState extends State<GameScreen> {
                 height: 200,
                 width: double.infinity,
                 child: Center(
-                  child: Text(
-                    'Tic Tac Toe',
-                    style: Theme.of(context).textTheme.headline2.copyWith(
+                  child: Text('Tic Tac Toe',
+                      style: TextStyle(
                           color: Colors.white,
-                        ),
-                  ),
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic)),
                 ),
               ),
               Stack(
