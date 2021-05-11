@@ -9,12 +9,15 @@ class GameScreen extends StatefulWidget {
   const GameScreen({Key key, this.isAil}) : super(key: key);
 
   @override
-  _GameScreenState createState() => _GameScreenState();
+  _GameScreenState createState() => _GameScreenState(isAil);
 }
 
 class _GameScreenState extends State<GameScreen> {
+  final bool isAi;
+  _GameScreenState(this.isAi);
   @override
   Widget build(BuildContext context) {
+    var gameWidget = GamePlay(isAi: isAi);
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -24,7 +27,20 @@ class _GameScreenState extends State<GameScreen> {
         title: Text(
           "Tic Tac Toe",
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.headline4.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+        ),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: CircleAvatar(
+            maxRadius: 10,
+            backgroundColor: Color.fromRGBO(120, 0, 0, 1),
+            child: Icon(Icons.chevron_left_sharp),
+          ),
         ),
       ),
       body: Center(
@@ -36,15 +52,15 @@ class _GameScreenState extends State<GameScreen> {
             shape: BoxShape.rectangle,
             border: Border.all(width: 2, color: Colors.black),
           ),
-          child: GamePlay(isAi: widget.isAil),
+          child: gameWidget,
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(120, 0, 0, 1),
         onPressed: () {
-          Navigator.of(context).pop();
+          gameWidget.gameplaystate.reset();
         },
-        child: Text('Replay'),
+        child: Icon(Icons.refresh_rounded),
       ),
     );
   }

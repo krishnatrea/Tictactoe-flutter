@@ -92,7 +92,7 @@ class _GameplayState extends State<GamePlay> {
 
   void taped(int i) {
     haveplay(i);
-    Future.delayed(const Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 400), () {
       if (howmanyclicked() != 9) {
         if (widget.isAi) {
           haveplay(indexbyAI());
@@ -140,7 +140,7 @@ class _GameplayState extends State<GamePlay> {
                 ? textShow(
                     'Player  ${player[currentplayer].playerSymbol}', context)
                 : textShow(
-                    'Game Over and ${player[winner].playerSymbol} is win',
+                    'Game Over and ${player[winner].playerSymbol} is winner',
                     context),
         SizedBox(
           height: 30,

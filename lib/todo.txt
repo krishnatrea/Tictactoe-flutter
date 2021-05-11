@@ -1,3 +1,0 @@
-two containers having gesturedetector and rounded boundries and 
-good looking color of home page 
-and theme design at least 2 themes on a saperate file ..

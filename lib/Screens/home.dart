@@ -10,15 +10,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      //   shadowColor: Colors.transparent,
-      //   title: Text(
-      //     "Tic Tac Toe",
-      //     textAlign: TextAlign.center,
-      //     style: Theme.of(context).textTheme.headline6,
-      //   ),
-      // ),
       body: Center(
         child: Container(
           width: MediaQuery.of(context).size.height,
@@ -28,77 +19,85 @@ class _HomeState extends State<Home> {
             shape: BoxShape.rectangle,
             border: Border.all(width: 2, color: Colors.black),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "TIC",
-                style: TextStyle(
-                    fontSize: 49,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff0077b6)),
-              ),
-              Text(
-                "TAC",
-                style: TextStyle(
-                    fontSize: 51,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff023e8a)),
-              ),
-              Text(
-                "TOE",
-                style: TextStyle(
-                    fontSize: 53,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff03045e)),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              GestureDetector(
-                onTap: () {
-                  navigate(true);
-                },
-                child: Container(
-                  height: 80,
-                  width: 290,
-                  decoration: BoxDecoration(
-                    color: Color(0xffbcd4e6),
-                    border: Border.all(width: 4, color: Colors.black),
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  child: Text(
-                    "   Single Player  ",
-                    style: TextStyle(color: Color(0xff03045e), fontSize: 38),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "TIC",
+                  style: TextStyle(
+                      fontSize: 49,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff0077b6)),
+                ),
+                Text(
+                  "TAC",
+                  style: TextStyle(
+                      fontSize: 51,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff023e8a)),
+                ),
+                Text(
+                  "TOE",
+                  style: TextStyle(
+                      fontSize: 53,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff03045e)),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    navigate(true);
+                  },
+                  child: Container(
+                    height: 80,
+                    width: 290,
+                    decoration: BoxDecoration(
+                      color: Color(0xffbcd4e6),
+                      border: Border.all(width: 4, color: Colors.black),
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Single Player",
+                        style:
+                            TextStyle(color: Color(0xff03045e), fontSize: 38),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              GestureDetector(
-                onTap: () {
-                  navigate(false);
-                },
-                child: Container(
-                  height: 80,
-                  width: 290,
-                  decoration: BoxDecoration(
-                    color: Color(0xffbbd0ff),
-                    border: Border.all(width: 4, color: Colors.black),
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                  child: Text(
-                    "   MultiPlayer  ",
-                    style: TextStyle(color: Color(0xff723c70), fontSize: 38),
+                SizedBox(
+                  height: 40,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    navigate(false);
+                  },
+                  child: Container(
+                    height: 80,
+                    width: 290,
+                    decoration: BoxDecoration(
+                      color: Color(0xffbbd0ff),
+                      border: Border.all(width: 4, color: Colors.black),
+                      borderRadius: BorderRadius.circular(40),
+                    ),
+                    child: Center(
+                      child: Text(
+                        "MultiPlayer",
+                        style:
+                            TextStyle(color: Color(0xff723c70), fontSize: 38),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
