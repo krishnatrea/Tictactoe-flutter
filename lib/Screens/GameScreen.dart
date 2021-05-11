@@ -16,17 +16,21 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       appBar: AppBar(
-        backgroundColor: Color(0xffa0c4ff),
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
         title: Text(
           "Tic Tac Toe",
+          textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headline6,
         ),
       ),
       body: Center(
         child: Container(
-          height: 600,
-          width: 380,
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             color: Color(0xfffae0e4),
             shape: BoxShape.rectangle,

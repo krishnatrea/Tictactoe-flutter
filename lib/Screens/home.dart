@@ -10,17 +10,19 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xffa0c4ff),
-        title: Text(
-          "Tic Tac Toe",
-          style: Theme.of(context).textTheme.headline6,
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   shadowColor: Colors.transparent,
+      //   title: Text(
+      //     "Tic Tac Toe",
+      //     textAlign: TextAlign.center,
+      //     style: Theme.of(context).textTheme.headline6,
+      //   ),
+      // ),
       body: Center(
         child: Container(
-          width: 380,
-          height: 600,
+          width: MediaQuery.of(context).size.height,
+          height: double.infinity,
           decoration: BoxDecoration(
             color: Color(0xfffae0e4),
             shape: BoxShape.rectangle,
@@ -28,6 +30,7 @@ class _HomeState extends State<Home> {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                 height: 20,
